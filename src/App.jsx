@@ -1,18 +1,26 @@
-import reactLogo from './assets/react.svg'
+import { useState } from 'react';
 import './App.css'
+import {WelcomeScreen} from './screens/WelcomeScreen'
+import GameScreen from './screens/GameScreen'
 
 function App() {
+  const [username, setUsername] = useState(``);
+  const [gameStarted, setGameStarted] = useState(false);
+  
+
   return (
     <>
-      <div>
-          <img src={reactLogo} className="logo react" alt="React logo" />
-      </div>
-      <h1>IT3049C</h1>
-      <div className="card">
-        <p>
-        Edit <code>src/App.jsx</code> and save to update this view.
-        </p>
-      </div>
+      {
+        gameStarted 
+        ? <GameScreen name={username} />
+        : <WelcomeScreen 
+            name={username} 
+            onInputChange={setUsername} 
+            gameStarted={gameStarted}
+            setGameStarted={setGameStarted}
+            />
+      }
+      <hr />
     </>
   )
 }
