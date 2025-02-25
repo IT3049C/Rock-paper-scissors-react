@@ -1,49 +1,54 @@
-import {useState} from 'react';
-import './WelcomeScreen.css';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import "./WelcomeScreen.css";
 
-export function WelcomeScreen ({
-    name, 
-    onInputChange,
-    setGameStarted
-}) {
-    const [error, setError] = useState(false);
+export function WelcomeScreen({ name, onInputChange, setGameStarted }) {
+  const [error, setError] = useState(false);
 
-    function handleStartGameClick () {
-        if(name !== ``) {
-            setGameStarted(true);
-        } else {
-            setError(true)
-        }
+  function handleStartGameClick() {
+    if (name !== ``) {
+      setGameStarted(true);
+    } else {
+      setError(true);
     }
+  }
 
-    return  <div id="welcome-screen">
-    <form id="name-form">
+  return (
+    <div id="welcome-screen">
+      <form id="name-form">
         <div className="form-group">
-            <label htmlFor="username">Type your name: </label>
-            <input 
-                value={name}
-                onChange={(e) => {onInputChange(e.target.value)}}
-                className="form-control" 
-                type="text" 
-                id="username"
-                name="username"
-                required placeholder="Enter Name Here..." minLength="2"
-                maxLength="15" />
-
+          <label htmlFor="username">Type your name: </label>
+          <input
+            value={name}
+            onChange={(e) => {
+              onInputChange(e.target.value);
+            }}
+            className="form-control"
+            type="text"
+            id="username"
+            name="username"
+            required
+            placeholder="Enter Name Here..."
+            minLength="2"
+            maxLength="15"
+          />
         </div>
-        {error 
-            ? <span style={{color: `red`, fontWeight: `bold`}}>
-                Error: You need to provide a name first</span>
-            : null
-        }
+        {error ? (
+          <span style={{ color: `red`, fontWeight: `bold` }}>Error: You need to provide a name first</span>
+        ) : null}
         <br />
-       { name !== '' ? <button
-            onClick={handleStartGameClick}
-            className="btn btn-primary" 
-            id="start-game-button" 
-            type="button">
+        {name !== "" ? (
+          <button onClick={handleStartGameClick} className="btn btn-primary" id="start-game-button" type="button">
             Start Game!
-        </button> : null}
-    </form>
-</div>
+          </button>
+        ) : null}
+      </form>
+    </div>
+  );
 }
+
+WelcomeScreen.propTypes = {
+  name: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  setGameStarted: PropTypes.func.isRequired,
+};

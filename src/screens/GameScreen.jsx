@@ -1,6 +1,7 @@
 import {RockPaperScissors} from '../rps';
 import { useState } from "react";
 import './GameScreen.css';
+import PropTypes from 'prop-types';
 
 const GameScreen = ({name}) => {
     const [userSelection, setUserSelection] = useState('rock');
@@ -64,5 +65,8 @@ const GameScreen = ({name}) => {
 
     </div>
 }
+GameScreen.propTypes = {
+    name: PropTypes.string.isRequired,
+};
 
 export default GameScreen;
