@@ -56,13 +56,9 @@ test.describe("Layout Checks", () => {
     await page.fill("#username", "John");
     await page.click("#start-game-button");
     
-    const isVisible = await page.locator("#game-screen").isVisible();
-  
     const dropdown = page.locator("select#user-selection");
-    const dropdownExists = await dropdown.count();
   
     const goButton = page.locator("#go-button");
-    const goButtonExists = await goButton.count();
   
     await expect(page.locator("#game-screen")).toBeVisible();
     await expect(dropdown).toBeVisible();

@@ -10,6 +10,7 @@ function App() {
 
   return (
     <>
+      <h1>Rock Paper Scissors</h1>
       {
         gameStarted 
         ? <GameScreen name={username} />

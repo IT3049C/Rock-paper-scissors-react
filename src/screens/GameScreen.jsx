@@ -1,19 +1,29 @@
 import {RockPaperScissors} from '../rps';
 import { useState } from "react";
+import './GameScreen.css';
 
 const GameScreen = ({name}) => {
     const [userSelection, setUserSelection] = useState('rock');
     const [game, setGame] = useState( new RockPaperScissors(name))
     const [userScore, setUserScore] = useState(0);
     const [cpuScore, setCpuScore] = useState(0);
-    const [historyLog, sethistoryLog]= useState([])
+    const [historyLog, setHistoryLog]= useState([])
 
     function handleGoButton() {
         console.log(`we're here`);
         game.play(userSelection);
         setUserScore(game.score.user);
         setCpuScore(game.score.cpu);
-        sethistoryLog(game.gameHistoryLog);
+        setHistoryLog(game.gameHistoryLog);
+    }
+
+    function handleReset() {
+        const newGame = new RockPaperScissors(name);
+        setGame(newGame);
+        setUserScore(0);
+        setCpuScore(0);
+        setHistoryLog([]);
+        setUserSelection('rock');
     }
 
     return <div id="game-screen">
@@ -45,7 +55,12 @@ const GameScreen = ({name}) => {
                 historyLog.map((item, i) => <li key={i}>{item}</li>)
             }
         </p>
-        <button id='reset-game-button' className='btn btn-secondary'>Reset </button>
+        <button 
+            id='reset-game-button' 
+            className='btn btn-secondary'
+            onClick={handleReset}>
+            Reset 
+        </button>
 
     </div>
 }
